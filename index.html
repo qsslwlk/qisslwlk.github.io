@@ -9,6 +9,14 @@
 <div>
   <canvas id="myChart"></canvas>
 </div>
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<py-script>
+ import pandas as pd
+ naissance=list(pd.read_excel('/Users/quentin/naissance.xlsx').values)
+ keys=list(naissance.value_counts().keys())
+ values=list(naissance.value_counts().values)
+</py-script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -18,10 +26,10 @@
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: pyscript.runtime.globals.get('keys'),
       datasets: [{
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: pyscript.runtime.globals.get('values'),
         borderWidth: 1
       }]
     },
